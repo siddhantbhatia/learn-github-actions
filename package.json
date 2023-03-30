@@ -1,0 +1,14 @@
+{
+  "name": "learn-github-actions",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:siddhantbhatia/learn-github-actions.git",
+  "author": "Siddhant Bhatia <siddhant8b@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "bootstrap": "lerna bootstrap"
+  },
+  "dependencies": {
+    "lerna": "^6.6.1"
+  }
+}

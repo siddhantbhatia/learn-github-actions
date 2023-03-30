@@ -1,0 +1,11 @@
+{
+    "name": "package-b",
+    "version": "1.0.0",
+    "main": "index.js",
+    "license": "MIT",
+    "dependencies": {
+        "tsdx": "^0.14.1",
+        "tslib": "^2.4.0",
+        "typescript": "^4.7.4"
+    }
+}

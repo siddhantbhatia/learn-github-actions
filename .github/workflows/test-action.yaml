@@ -1,0 +1,53 @@
+name: 'temp action playground'
+
+on: push
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout branch
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 300
+      - name: Fetch master
+        run: git fetch --no-tags origin master
+      - name: workspace details
+        run: |
+          echo 'github.workspace === ${{ github.workspace }}'
+          echo "GITHUB_WORKSPACE === $GITHUB_WORKSPACE"
+          echo 'runner.workspace === ${{ runner.workspace }}'
+          echo "RUNNER_WORKSPACE === $RUNNER_WORKSPACE"
+      - name: get github workspace repo details
+        # if: failure()
+        run: ls $GITHUB_WORKSPACE
+      - name: get runner workspace repo details
+        run: ls ${{ runner.workspace }}
+      - name: get working directory
+        run: pwd
+      - name: Setup node
+        uses: actions/setup-node@v3
+        with:
+          registry-url: 'https://npm.pkg.github.com'
+          node-version: 18
+          cache: yarn
+      - name: Install lerna
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.READONLY_GITHUB_TOKEN }}
+        run: yarn install --pure-lockfile
+      - name: lerna should exist
+        run: ls node_modules/
+      - name: packages should exist
+        run: ls packages/
+      - name: bootstrap packages
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.READONLY_GITHUB_TOKEN }}
+        run: npx lerna bootstrap --force-local -- --verbose
+      - name: package a should exist
+        run: ls packages/a/
+      - name: package b should exist
+        run: ls packages/b/
+      - name: package c should exist
+        run: ls packages/c/
+      - name: package d should exist
+        run: ls packages/d/
