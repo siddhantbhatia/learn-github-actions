@@ -44,10 +44,10 @@ jobs:
           NODE_AUTH_TOKEN: ${{ secrets.READONLY_GITHUB_TOKEN }}
         run: npx lerna bootstrap --force-local -- --verbose
       - name: package a should exist
-        run: ls packages/a/
+        run: ls packages/a/node_modules/
       - name: package b should exist
-        run: ls packages/b/
+        run: ls packages/b/node_modules/
       - name: package c should exist
-        run: ls packages/c/
+        run: ls packages/c/node_modules/
       - name: package d should exist
-        run: ls packages/d/
+        run: ls packages/d/node_modules/
